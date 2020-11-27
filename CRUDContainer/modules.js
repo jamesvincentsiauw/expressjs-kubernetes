@@ -1,22 +1,11 @@
 const db_config = require('./config/database.config.js');
 const MongoClient = require('mongodb').MongoClient;
-const jwt = require('jsonwebtoken');
-const db_name = 'user';
-
-const login = (params) => {
-
-};
-
-const register = async(params) => {
-
-};
 
 const getUser = async(params) => {
-    console.log('param:', params);
     // Verify Access Token
-    const isVerified = await verifyToken(params.accessToken, params.permittedRole);
+    const isVerified = await verifyToken(params.accesstoken, 'all');
 
-    if (!isVerified.status) {
+    if (!isVerified.verified) {
         const retval = {
             status: 400,
             message: 'Access Denied',
@@ -34,7 +23,7 @@ const getUser = async(params) => {
             const collection = db.collection('users');
 
             // Get All Data
-            let res = await collection.find().toArray();
+            const res = await collection.find().toArray();
 
             // Build Response Payload
             const retval = {
@@ -65,13 +54,11 @@ const deleteUSer = (params) => {
 
 const verifyToken = (accessToken, permittedRole) => {
     try {
-
-        console.log(accessToken, permittedRole);
         // Verify Given Access Token
-        const decodedToken = jwt.verify(accessToken, 'secretx123');
+        const decodedToken = jwt.verify(accessToken, jwtSecret);
 
         // Verify Permitted Role
-        if (decodedToken.role != permittedRole) {
+        if (permittedRole == 'admin' && decodedToken.role != permittedRole) {
             throw new Error('Your Role is Not Allowed to Access This Resources!');
         }
 
