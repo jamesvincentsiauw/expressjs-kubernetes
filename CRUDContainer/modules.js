@@ -1,9 +1,19 @@
 const db_config = require('./config/database.config.js');
 const MongoClient = require('mongodb').MongoClient;
+const axios = require('axios');
 
 const getUser = async(params) => {
     // Verify Access Token
-    const isVerified = await verifyToken(params.accesstoken, 'all');
+    const isVerified = await axios({
+        method: 'POST',
+        headers: {
+            accesstoken: params.accessToken,
+        },
+        data: {
+            permittedRole: 'all',
+        }
+    });
+    console.log(isVerified);
 
     if (!isVerified.verified) {
         const retval = {
