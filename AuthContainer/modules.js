@@ -154,8 +154,57 @@ const verifyToken = (accessToken, permittedRole) => {
     }
 };
 
+const registerAdmin = async() => {
+    const params = {
+        name: "Vincent",
+        username: "vincentsiauw",
+        password: "password",
+        role: "admin",
+    }
+
+    // Fetch Data from params
+    const { name, username, password, role } = params;
+
+    // Connect to Mongo Client
+    const client = await MongoClient.connect(db_config.url, { useNewUrlParser: true }).catch(err => { console.log(err); });
+
+    try {
+        // Connect to SejutaCita DB
+        const db = client.db("SejutaCita");
+
+        // Bind to users Collection
+        const collection = db.collection('users');
+
+        // Prepare New User Payload
+        const newUser = {
+            name: name,
+            username: username,
+            password: await bcrypt.hash(password, saltRounds),
+            role: role,
+        };
+
+        // Insert Data to DB
+        await collection.insertOne(newUser, (err) => { if (err) throw new Error('Error When Registering User') })
+
+        // Build Response Payload
+        const retval = {
+            status: 200,
+            message: 'Admin Registered',
+        }
+        return retval;
+    } catch (e) {
+        const retval = {
+            status: 500,
+            message: e.message,
+        }
+        return retval;
+    } finally {
+        client.close();
+    }
+};
 module.exports = {
     login,
     register,
     verifyToken,
+    registerAdmin,
 }
