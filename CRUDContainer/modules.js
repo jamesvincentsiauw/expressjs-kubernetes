@@ -6,12 +6,15 @@ const saltRounds = 10;
 
 const getUser = async(params) => {
     // Verify Access Token
-    const isVerified = await verifyTokenAPI(params.accesstoken, 'all');
+    const isVerified = await verifyTokenAPI(params.accesstoken, 'all')
+        .catch((e) => {
+            return e.response;
+        });
 
     if (!isVerified.data.verified) {
         const retval = {
             status: 400,
-            message: 'Access Denied',
+            message: isVerified.data.message,
         }
         return retval;
     } else {
@@ -49,12 +52,15 @@ const getUser = async(params) => {
 
 const editUser = async(headers, params) => {
     // Verify Access Token
-    const isVerified = await verifyTokenAPI(headers.accesstoken, 'admin');
+    const isVerified = await verifyTokenAPI(headers.accesstoken, 'admin')
+        .catch((e) => {
+            return e.response;
+        });
 
     if (!isVerified.data.verified) {
         const retval = {
             status: 400,
-            message: 'Access Denied',
+            message: isVerified.data.message,
         }
         return retval;
     } else {
