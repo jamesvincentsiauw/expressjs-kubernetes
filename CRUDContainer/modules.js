@@ -104,7 +104,7 @@ const editUser = async(headers, params) => {
             }
 
             // Update All Data
-            const res = await collection.updateOne(query, { $set: doc });
+            await collection.updateOne(query, { $set: doc });
 
             // Build Response Payload
             const retval = {
@@ -124,8 +124,68 @@ const editUser = async(headers, params) => {
     }
 };
 
-const deleteUSer = (params) => {
+const deleteUser = async(headers, params) => {
+    // Verify Access Token
+    const isVerified = await verifyTokenAPI(headers.accesstoken, 'admin')
+        .catch((e) => {
+            return e.response;
+        });
 
+    if (!isVerified.data.verified) {
+        const retval = {
+            status: 400,
+            message: isVerified.data.message,
+        }
+        return retval;
+    } else {
+        // Connect to Mongo Client
+        const client = await MongoClient.connect(db_config.url, { useNewUrlParser: true }).catch(err => { console.log(err); });
+
+        try {
+            // Connect to SejutaCita DB
+            const db = client.db("SejutaCita");
+
+            // Bind to users Collection
+            const collection = db.collection('users');
+
+            // Update Query
+            const query = {
+                username: params.username,
+            };
+
+            // Get Related Doc
+            const doc = await collection.findOne(query);
+
+            console.log(doc == null);
+
+            // If USer with Spesific Username not Found
+            if (doc == null) {
+                const retval = {
+                    status: 400,
+                    message: 'User Not Found',
+                }
+                return retval;
+            }
+
+            // Delete Data
+            await collection.deleteOne(query);
+
+            // Build Response Payload
+            const retval = {
+                status: 200,
+                message: 'User Deleted',
+            }
+            return retval;
+        } catch (e) {
+            const retval = {
+                status: 500,
+                message: e.message,
+            }
+            return retval;
+        } finally {
+            client.close();
+        }
+    }
 };
 
 const verifyTokenAPI = (accesstoken, role) => {
@@ -146,5 +206,5 @@ const verifyTokenAPI = (accesstoken, role) => {
 module.exports = {
     getUser,
     editUser,
-    deleteUSer,
+    deleteUser,
 }

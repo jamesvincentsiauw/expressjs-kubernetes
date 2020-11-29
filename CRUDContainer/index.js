@@ -17,7 +17,7 @@ app.put('/user', async(req, res) => {
 });
 
 app.delete('/user', async(req, res) => {
-    const response = await deleteUser(req.body);
+    const response = await deleteUser(req.headers, req.body);
     res.status(response.status).send(response);
 });
 
