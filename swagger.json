@@ -1,0 +1,407 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Sejuta Cita Entry Test",
+        "description": "This API is Built for SejutaCita Entry Test",
+        "contact": {
+            "email": "jamesvincentsiauw@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [{
+            "url": "http://localhost:3000",
+            "description": "Handling authentication function (login and register)"
+        },
+        {
+            "url": "http://localhost:4000",
+            "description": "Handling /user endpoint"
+        }
+    ],
+    "tags": [{
+            "name": "admin"
+        },
+        {
+            "name": "user"
+        }
+    ],
+    "paths": {
+        "/register": {
+            "post": {
+                "tags": [
+                    "admin"
+                ],
+                "summary": "user registration method",
+                "parameters": [{
+                    "name": "accesstoken",
+                    "in": "header",
+                    "description": "got this after logged in",
+                    "required": true,
+                    "style": "simple",
+                    "explode": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "requestBody": {
+                    "description": "login admin account",
+                    "content": {
+                        "application/x-www-url-encoded": {
+                            "schema": {
+                                "required": [
+                                    "password",
+                                    "username"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "vincentsiauw"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "user created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 201
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "New User Registered"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request parameter"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "admin"
+                ],
+                "summary": "authentication method",
+                "requestBody": {
+                    "description": "login admin account",
+                    "content": {
+                        "application/x-www-url-encoded": {
+                            "schema": {
+                                "required": [
+                                    "password",
+                                    "username"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "vincentsiauw"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "access given",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User Updated"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "accesstoken": {
+                                                    "type": "string",
+                                                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmMyZmQwZTNkMmM1NDRkMDhmYWMxZjciLCJ1c2VybmFtZSI6InZpbmNlbnRzaWF1dyIsIm5hbWUiOiJWaW5jZW50IEVESVQgMiIsInBhc3N3b3JkIjoiJDJiJDEwJG92R2JBVzRKU2xlNnlUb29zb2gxaS53emdwclZqSzIzN01jb05WMTdQY0NJcGVYRkhGLnlTIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjA2NjMxOTM4LCJleHAiOjE2MDY2NzUxMzh9.JZR4Efdx4H790ICLMJv-J9RrQs5qauLtkToMABns7_o"
+                                                },
+                                                "user": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "_id": {
+                                                            "type": "string",
+                                                            "example": "5fc2fd0e3d2c544d08fac1f7"
+                                                        },
+                                                        "username": {
+                                                            "type": "string",
+                                                            "example": "vincentsiauw"
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Vincent"
+                                                        },
+                                                        "password": {
+                                                            "type": "string",
+                                                            "example": "$2b$10$ovGbAW4JSle6yToosoh1i.wzgprVjK237McoNV17PcCIpeXFHF.yS"
+                                                        },
+                                                        "role": {
+                                                            "type": "string",
+                                                            "example": "admin"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request parameter"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "get all registered user",
+                "parameters": [{
+                    "name": "accesstoken",
+                    "in": "header",
+                    "description": "got this after logged in",
+                    "required": true,
+                    "style": "simple",
+                    "explode": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "show all registered user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad input parameter"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "admin"
+                ],
+                "summary": "edit user data",
+                "parameters": [{
+                    "name": "accesstoken",
+                    "in": "header",
+                    "description": "got this after logged in",
+                    "required": true,
+                    "style": "simple",
+                    "explode": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "requestBody": {
+                    "description": "edit user based on inputed username",
+                    "content": {
+                        "application/x-www-url-encoded": {
+                            "schema": {
+                                "required": [
+                                    "username"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "vincentsiauw"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Vincent EDIT"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "example": "admin"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "user updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User Updated"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request parameter"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "admin"
+                ],
+                "summary": "delete user",
+                "parameters": [{
+                    "name": "accesstoken",
+                    "in": "header",
+                    "description": "got this after logged in",
+                    "required": true,
+                    "style": "simple",
+                    "explode": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "requestBody": {
+                    "description": "delete user based on inputed username",
+                    "content": {
+                        "application/x-www-url-encoded": {
+                            "schema": {
+                                "required": [
+                                    "username"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "vincentsiauw"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "user deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User Deleted"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request parameter"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "example": "5fc2fd0e3d2c544d08fac1f7"
+                    },
+                    "username": {
+                        "type": "string",
+                        "example": "vincentsiauw"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Vincent"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "$2b$10$ovGbAW4JSle6yToosoh1i.wzgprVjK237McoNV17PcCIpeXFHF.yS"
+                    },
+                    "role": {
+                        "type": "string",
+                        "example": "admin"
+                    }
+                }
+            }
+        }
+    }
+}
