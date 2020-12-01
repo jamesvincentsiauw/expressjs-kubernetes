@@ -1,5 +1,11 @@
 # Sejuta Cita Back End Test
 
+## Admin Credential
+```
+username: vincentsiauw
+password: password
+```
+
 ## How to Run via Docker
 ``` bash
 # Clone the Repository
