@@ -1,5 +1,8 @@
 # Sejuta Cita Back End Test
 
+## API Documentation (Swagger)
+http://188.166.209.39:3000/api-docs
+
 ## Admin Credential
 ```
 username: vincentsiauw

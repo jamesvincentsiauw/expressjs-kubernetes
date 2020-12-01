@@ -13,11 +13,11 @@
         "version": "1.0.0"
     },
     "servers": [{
-            "url": "http://localhost:3000",
+            "url": "http://188.166.209.39:3000",
             "description": "Handling authentication function (login and register)"
         },
         {
-            "url": "http://localhost:4000",
+            "url": "http://188.166.209.39:4000",
             "description": "Handling /user endpoint"
         }
     ],
@@ -49,7 +49,7 @@
                 "requestBody": {
                     "description": "login admin account",
                     "content": {
-                        "application/x-www-url-encoded": {
+                        "application/x-www-form-urlencoded": {
                             "schema": {
                                 "required": [
                                     "password",
@@ -109,7 +109,7 @@
                 "requestBody": {
                     "description": "login admin account",
                     "content": {
-                        "application/x-www-url-encoded": {
+                        "application/x-www-form-urlencoded": {
                             "schema": {
                                 "required": [
                                     "password",
@@ -252,7 +252,7 @@
                 "requestBody": {
                     "description": "edit user based on inputed username",
                     "content": {
-                        "application/x-www-url-encoded": {
+                        "application/x-www-form-urlencoded": {
                             "schema": {
                                 "required": [
                                     "username"
@@ -328,7 +328,7 @@
                 "requestBody": {
                     "description": "delete user based on inputed username",
                     "content": {
-                        "application/x-www-url-encoded": {
+                        "application/x-www-form-urlencoded": {
                             "schema": {
                                 "required": [
                                     "username"
