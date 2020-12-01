@@ -10,6 +10,14 @@ spec:
   rules:
     - http:
         paths:
+          - path: /login
+            backend:
+              serviceName: auth
+              servicePort: 3000
+          - path: /register
+            backend:
+              serviceName: auth
+              servicePort: 3000
           - path: /user
             backend:
               serviceName: crud
