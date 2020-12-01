@@ -61,26 +61,25 @@ CRUD: http://<your-ip-service>:4000/
 ```
 
 ## API Flow
-- *Login* 
-<img src="Documents/login_scheme.png"
-     alt="Markdown Monster icon"
-     style="float: left; margin-right: 10px" />
-- *Register*
-<img src="Documents/register_scheme.png"
-     alt="Markdown Monster icon"
-     style="float: left; margin-right: 10px" />
-- *Get User*
-<img src="Documents/get_scheme.png"
-     alt="Markdown Monster icon"
-     style="float: left; margin-right: 10px" />
-- *Edit User*
-<img src="Documents/edit_scheme.png"
-     alt="Markdown Monster icon"
-     style="float: left; margin-right: 10px" />
-- *Delete User*
-<img src="Documents/delete_scheme.png"
-     alt="Markdown Monster icon"
-     style="float: left; margin-right: 10px" />
+### Login 
+![Login Flow](/Documents/login_scheme.png "Login Flow")
+<br><br>
+
+### Register
+![Register Flow](/Documents/register_scheme.png "Register Flow")
+<br><br>
+
+### Get User
+![Get User Flow](/Documents/get_scheme.png "Get User Flow")
+<br><br>
+
+### Edit User
+![Edit User Flow](/Documents/edit_scheme.png "Edit User Flow")
+<br><br>
+
+### Delete User
+![Delete User Flow](/Documents/delete_scheme.png "Delete User Flow")
+<br><br>
 
 ## Live IP Address for Test Need
 Auth: http://188.166.209.39:3000/
