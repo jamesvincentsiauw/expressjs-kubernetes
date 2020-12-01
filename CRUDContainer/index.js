@@ -1,8 +1,10 @@
 const bodyParser = require('body-parser');
+var cors = require('cors');
 const express = require('express');
 const app = express();
 const { getUser, editUser, deleteUser } = require('./modules');
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

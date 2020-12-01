@@ -1,10 +1,12 @@
 const bodyParser = require('body-parser');
+var cors = require('cors');
 const express = require('express');
 const app = express();
 const { login, register, verifyToken, registerAdmin } = require('./modules');
 const swaggerUi = require('swagger-ui-express'),
     swaggerDocument = require('../swagger.json');
 
+app.use(cors());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
