@@ -109,7 +109,7 @@ const register = async(headers, params) => {
 
             // Build Response Payload
             const retval = {
-                status: 200,
+                status: 201,
                 message: 'New User Registered',
             }
             return retval;

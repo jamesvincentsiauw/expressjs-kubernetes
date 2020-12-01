@@ -1,0 +1,31 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: crud
+# spec:
+#   ports:
+#   - port: 4000
+#     targetPort: 4000
+#   selector:
+#     app: crud
+#     name: crud
+# ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crud
+spec:
+  selector:
+    matchLabels:
+      app: crud
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: crud
+    spec:
+      containers:
+      - name: crud
+        image: jamesvincentsiauw/sejutacita-crud:final
+        ports:
+        - containerPort: 4000
