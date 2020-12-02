@@ -90,6 +90,6 @@ CRUD: http://<your-ip-service>:4000/
 ![Delete User Flow](/Documents/delete_scheme.png "Delete User Flow")
 <br><br>
 
-## Live IP Address for Test Need
+## Live IP Address for Testing
 Auth: http://188.166.209.39:3000/
 CRUD: http://188.166.209.39:4000/
